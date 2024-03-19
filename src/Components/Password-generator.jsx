@@ -3,7 +3,9 @@ import Slider from "@mui/material/Slider";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
+import { Button, Snackbar, Alert } from '@mui/material';
+
 
 
 
@@ -17,6 +19,8 @@ const PasswordGenerator = () => {
   const [lowerCaseChecked, setLowerCaseChecked] = useState(false);
   const [numberChecked, setNumberChecked] = useState(false);
   const [symbolChecked, setSymbolChecked] = useState(false);
+  const [openGenerateSnackbar, setOpenGenerateSnackbar] = useState(false);
+  const [openCopySnackbar, setOpenCopySnackbar] = useState(false);
   const[strength,setStrength]=useState(0)
 
   const handleUpperCaseChecked = () => {
@@ -60,10 +64,20 @@ useEffect(()=>{
       newPassword+=collectCharacters.charAt(Math.floor(Math.random()*collectCharacters.length))
     }
     setGeneratedPassword(newPassword)
+    setOpenGenerateSnackbar(true)
+
   }
   const copyPassword=()=>{
     navigator.clipboard.writeText(generatedPassword)
+    setOpenCopySnackbar(true)
   }
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+    }
+    setOpenCopySnackbar(false);
+    setOpenGenerateSnackbar(false);
+};
   return (
     <Fragment>
       <div className="container">
@@ -77,6 +91,17 @@ useEffect(()=>{
           <Button variant="contained" color="success" onClick={copyPassword}>
         copy
       </Button>
+      <Snackbar open={openCopySnackbar} autoHideDuration={3000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              color="info"
+              variant="filled"
+              sx={{ width: '100%' }}
+            >
+              Password Copied Successfully
+            </Alert>
+          </Snackbar>
         </div>{" "}
         {/* password container end */}
         <div className="password-generator-container">
@@ -167,6 +192,17 @@ useEffect(()=>{
                 <Button variant="contained" color="success" className="passwordGenerateButton" onClick={generateRandomPassword}>
         Generate
       </Button>
+      <Snackbar open={openGenerateSnackbar} autoHideDuration={3000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              color="success"
+              variant="filled"
+              sx={{ width: '100%' }}
+            >
+              Password Copied Successfully
+            </Alert>
+          </Snackbar>
           {/* strength container end */}
 
         </div>
