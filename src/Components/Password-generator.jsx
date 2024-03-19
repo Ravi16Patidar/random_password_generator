@@ -72,7 +72,8 @@ useEffect(()=>{
         <div className="password-container">
           {" "}
           {/* password container start */}
-          <h1 className="generatedPasswordStyle">{generatedPassword}</h1>
+          <h1 className="generatedPasswordStyle">    {generatedPassword.length > 30 ? generatedPassword.slice(0, 40) + '...' : generatedPassword}
+</h1>
           <Button variant="contained" color="success" onClick={copyPassword}>
         copy
       </Button>

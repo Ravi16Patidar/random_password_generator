@@ -33,9 +33,10 @@ body{
     justify-content: space-between;
     align-items: center;
     padding:30px;
+    gap:20px;
 }
 .generatedPasswordStyle{
-    font-size:25px;
+    font-size:20px;
     color: var(--textColor);
     word-break: break-all;
 }
@@ -107,8 +108,11 @@ body{
     }
 }
 
-@media screen and (max-width: 318px) {
-    * {
-        font-size: 10px;
-    }
+@media screen and (max-width:373px) {
+   .password-container{
+    overflow: hidden;
+   }
+   .generatedPasswordStyle{
+    font-size:15px;
+   }
 }
