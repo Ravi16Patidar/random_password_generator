@@ -200,7 +200,7 @@ useEffect(()=>{
               variant="filled"
               sx={{ width: '100%' }}
             >
-              Password Copied Successfully
+              Password Generated Successfully
             </Alert>
           </Snackbar>
           {/* strength container end */}
